@@ -230,7 +230,7 @@ function achievement(object, datas) {
       bestDistance = Number(data.distance);
     if (bestTime < allSec(data.time)) bestTime = allSec(data.time);
   }
-  object.sumDistance = String(sumDistance);
+  object.sumDistance = String(Math.round(sumDistance*100)/100);
   object.sumTime = sec2hour(sumTime);
   object.bestDistance = String(bestDistance);
   object.bestTime = sec2hour(bestTime);
