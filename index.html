@@ -23,41 +23,38 @@
     <title>Running</title>
   </head>
   <body class="container-fluid">
-    <header
-      class="row"
-      style="height: 10vh; background-color: aquamarine"
-    >
-      <div class="col-9 pl-5" style="font-size: 50px; line-height: 10vh;">
+    <header class="row" style="height: 10vh; background-color: aquamarine">
+      <div class="col-9 pl-5" style="font-size: 50px; line-height: 10vh">
         Run
       </div>
       <div class="col-3">
         <button
-            type="button"
-            id="dropdown1"
-            class="mt-2 btn btn-secondary dropdown-toggle"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            style="font-size: 2vw"
-          >
-            ルール
-          </button>
-          <div
-            class="dropdown-menu dropdown-menu-right"
-            aria-labelledby="dropdown1"
-          >
-            <p class="dropdown-item" style="margin-bottom: 0; padding: 0">
-              ランニングを記録するサイトです。<br>
-              別のブラウザとはデータを共有できません<br>
-              データの追加条件：<br>
-              　・空欄がない<br>
-              　・距離が0より大きい<br>
-              　・時間が00：00より大きく100：00より小さい<br>
-              年毎の記録を見ることができます。<br>
-            </p>
-          </div>
+          type="button"
+          id="dropdown1"
+          class="mt-2 btn btn-secondary dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          style="font-size: 2vw"
+        >
+          使い方
+        </button>
+        <div
+          class="dropdown-menu dropdown-menu-right"
+          aria-labelledby="dropdown1"
+        >
+          <p class="dropdown-item" style="margin-bottom: 0; padding: 0">
+            ランニングを記録するサイトです。<br />
+            別のブラウザとはデータを共有できません<br />
+            データの追加条件：<br />
+            　・空欄がない<br />
+            　・距離が0より大きい<br />
+            　・時間が00：00より大きく100：00より小さい<br />
+            年毎の記録を見ることができます。<br />
+          </p>
+        </div>
       </div>
-  </header>
+    </header>
     <main
       class="row"
       style="height: auto; width: 100vw; background-color: cadetblue"
@@ -130,7 +127,8 @@
                   v-model="newItem.sec"
                 />
               </div>
-              <button type="submit" class="btn btn-primary">Add</button><p id="error"></p>
+              <button type="submit" class="btn btn-primary">Add</button>
+              <p id="error"></p>
             </form>
           </div>
         </div>
@@ -139,7 +137,11 @@
         <div class="row">
           <div class="col-5"><strong>Chart</strong></div>
           <div class="col-7">
-            <select v-model="select" class="form-select" aria-label="Default select example">
+            <select
+              v-model="select"
+              class="form-select"
+              aria-label="Default select example"
+            >
               <option selected disabled value="">Please select one</option>
               <option value="2023">2023</option>
               <option value="2022">2022</option>
