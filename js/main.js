@@ -44,7 +44,7 @@ function validation(data) {
   let min = Number(data.min);
   let sec = Number(data.sec);
   if (distance > 0 && data.date != "") {
-    if ((min >= 0 && min < 60) || (min == 60 && sec == 0)) {
+    if (min > 0 && min < 100 || min==0 && sec>0) {
       if (sec >= 0 && sec < 60) flag = true;
     }
   }
@@ -66,6 +66,7 @@ let vm = new Vue({
     runDatas: {
       handler: function () {
         mainDo(vmChart.datas, vmChart.select);
+        achievement(vmChart.achievement, vmChart.datas);
         localStorage.setItem("runDatas", JSON.stringify(this.runDatas));
       },
       deep: true,
@@ -202,11 +203,51 @@ function mainDo(datas, select) {
   });
 }
 
+function allSec(time) {
+  return Number(time.substr(0, 2)) * 60 + Number(time.substr(3, 2));
+}
+
+function sec2hour(sec) {
+  return (
+    digit(Math.floor(sec / 3600)) +
+    ":" +
+    digit(Math.floor((sec % 3600) / 60)) +
+    ":" +
+    digit(sec % 60)
+  );
+}
+
+function achievement(object, datas) {
+  object.sumCount = datas.length;
+  let sumDistance = 0;
+  let sumTime = 0;
+  let bestDistance = 0;
+  let bestTime = 0;
+  for (let data of datas) {
+    sumDistance += Number(data.distance);
+    sumTime += allSec(data.time);
+    if (bestDistance < Number(data.distance))
+      bestDistance = Number(data.distance);
+    if (bestTime < allSec(data.time)) bestTime = allSec(data.time);
+  }
+  object.sumDistance = String(sumDistance);
+  object.sumTime = sec2hour(sumTime);
+  object.bestDistance = String(bestDistance);
+  object.bestTime = sec2hour(bestTime);
+}
+
 let vmChart = new Vue({
   el: "#chart",
   data: {
     datas: vm.runDatas,
     select: "2021",
+    achievement: {
+      sumDistance: "",
+      sumTime: "",
+      sumCount: "",
+      bestDistance: "",
+      bestTime: "",
+    },
   },
   watch: {
     select: {
@@ -218,5 +259,6 @@ let vmChart = new Vue({
   },
   mounted: function () {
     mainDo(this.datas, this.select);
+    achievement(this.achievement, this.datas);
   },
 });
